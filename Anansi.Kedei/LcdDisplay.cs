@@ -55,17 +55,14 @@
 		}
 
 		public void LoadFont(string fileName, int cwidth, int cheight, int ccount) {
-			if (false == File.Exists(fileName))
-			{
-				throw new InvalidOperationException("File not exists");
-			}
 			var matrix = new List<int>();
-			using (var image = new Bitmap(new FileInfo(fileName).FullName))
+			using (var image = new Bitmap(fileName))
 			{
 				for (var i = 0; i < image.Height; i++)
 				{
 					for (var j = 0; j < image.Width; j++)
 					{
+						Console.WriteLine(i.ToString() + ":" + j.ToString());
 						matrix.Add(image.GetPixel(i, j).ToArgb());
 					}
 				}

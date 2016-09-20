@@ -7,8 +7,9 @@
   <MonoDevelop.Ide.ItemProperties.Anansi.Console PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Anansi.Kedei\LcdDisplay.cs">
     <Files>
-      <File FileName="Anansi.Console\Program.cs" Line="18" Column="1" />
-      <File FileName="Anansi.Kedei\LcdDisplay.cs" Line="41" Column="19" />
+      <File FileName="Anansi.Console\Program.cs" Line="21" Column="29" />
+      <File FileName="Anansi.Kedei\LcdDisplay.cs" Line="63" Column="43" />
+      <File FileName="Anansi.Kedei\GlobalSuppressions.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
 </Properties>
