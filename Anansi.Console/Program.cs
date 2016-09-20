@@ -9,8 +9,10 @@
 		{
 			using (var display = new LcdDisplay())
 			{
+				Console.WriteLine("LCD Init");
 				display.Init();
-				Console.WriteLine("Hello world!");
+				Console.WriteLine("LCD Clear");
+				display.Clear(0x00);
 			}
 		}
 	}
