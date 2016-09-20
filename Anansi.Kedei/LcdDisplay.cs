@@ -4,6 +4,7 @@
 	using System.Runtime.InteropServices;
 	using System.Drawing;
 	using System.Collections.Generic;
+	using System.IO;
 
 	public class LcdDisplay : IDisposable
 	{
@@ -54,8 +55,12 @@
 		}
 
 		public void LoadFont(string fileName, int cwidth, int cheight, int ccount) {
+			if (false == File.Exists(fileName))
+			{
+				throw new InvalidOperationException("File not exists");
+			}
 			var matrix = new List<int>();
-			using (var image = new Bitmap(fileName))
+			using (var image = new Bitmap(new FileInfo(fileName).FullName))
 			{
 				for (var i = 0; i < image.Height; i++)
 				{
