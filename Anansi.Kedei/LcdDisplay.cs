@@ -23,6 +23,15 @@
 		static extern void lcd_reset();
 		[DllImport("libkedei.so")]
 		static extern void lcd_load_chars(int cwidth, int cheight, int ccout, ref IntPtr matrix);
+		[DllImport("libkedei.so")]
+		static extern void lcd_draw_symbol(int x, int y, int sym, int color);
+
+		readonly List<IntPtr> pointers;
+
+		public LcdDisplay()
+		{
+			pointers = new List<IntPtr>();
+		}
 
 		public void Init()
 		{
@@ -39,10 +48,12 @@
 			lcd_reset();
 		}
 
+		public void DrawSymbol(int x, int y, char symbol, int color)
+		{
+			lcd_draw_symbol(x, y, symbol, color);
+		}
+
 		public void LoadFont(string fileName, int cwidth, int cheight, int ccount) {
-			// height 16
-			// width 1152
-			// char width 12
 			var matrix = new List<int>();
 			using (var image = new Bitmap(fileName))
 			{
@@ -57,6 +68,7 @@
 			var matrixArray = matrix.ToArray();
 			var buffer = Marshal.AllocCoTaskMem(sizeof(uint) * matrixArray.Length);
 			Marshal.Copy(matrixArray, 0, buffer, matrixArray.Length);
+			pointers.Add(buffer);
 			lcd_load_chars(cwidth, cheight, ccount, ref buffer);
 		}
 
@@ -72,6 +84,17 @@
 
 		public void Dispose()
 		{
+			foreach (var ptr in pointers)
+			{
+				try
+				{
+					Marshal.FreeCoTaskMem(ptr);
+				}
+				catch 
+				{
+				}
+			}
+			pointers.Clear();
 			lcd_close();
 		}
 	}

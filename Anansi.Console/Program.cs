@@ -17,8 +17,10 @@
 				display.Rectangle(10, 10, 30, 40, 0xFF);
 				Console.WriteLine("LCD Rectangle Empty");
 				display.EmptyRectangle(10, 50, 30, 70, 0xFF, 0xAD);
-				//display.LoadFont("font.bmp", 12, 16, 96);
-
+				Console.WriteLine("LCD Load Font");
+				display.LoadFont("font.bmp", 12, 16, 96);
+				Console.WriteLine("LCD Display symbol");
+				display.DrawSymbol(10, 70, (char)0xfa, 0xFF);
 			}
 		}
 	}
