@@ -9,6 +9,7 @@
 		{
 			using (var display = new LcdDisplay())
 			{
+				display.Init();
 				Console.WriteLine("Hello world!");
 			}
 		}
