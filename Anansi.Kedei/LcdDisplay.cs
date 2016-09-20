@@ -23,7 +23,7 @@
 		[DllImport("libkedei.so")]
 		static extern void lcd_reset();
 		[DllImport("libkedei.so")]
-		static extern void lcd_load_chars(int cwidth, int cheight, int ccout, IntPtr matrix);
+		static extern void lcd_load_chars(int cwidth, int cheight, int ccout, [In]int[] matrix);
 		[DllImport("libkedei.so")]
 		static extern void lcd_draw_symbol(int x, int y, int sym, int color);
 
@@ -67,10 +67,7 @@
 				}
 			}
 			var matrixArray = matrix.ToArray();
-			var buffer = Marshal.AllocCoTaskMem(sizeof(uint) * matrixArray.Length);
-			Marshal.Copy(matrixArray, 0, buffer, matrixArray.Length);
-			pointers.Add(buffer);
-			lcd_load_chars(cwidth, cheight, ccount, buffer);
+			lcd_load_chars(cwidth, cheight, ccount, matrixArray);
 		}
 
 		public void EmptyRectangle(int x, int y, int ex, int ey, int borderColor, int background)
