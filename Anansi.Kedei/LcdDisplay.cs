@@ -58,12 +58,11 @@
 			var matrix = new List<int>();
 			using (var image = new Bitmap(fileName))
 			{
-				for (var i = 0; i < image.Height; i++)
+				for (var y = 0; y < image.Height; y++)
 				{
-					for (var j = 0; j < image.Width; j++)
+					for (var x = 0; x < image.Width; x++)
 					{
-						Console.WriteLine(i.ToString() + ":" + j.ToString());
-						matrix.Add(image.GetPixel(i, j).ToArgb());
+						matrix.Add(image.GetPixel(x, y).ToArgb());
 					}
 				}
 			}
