@@ -20,7 +20,7 @@
 				Console.WriteLine("LCD Load Font");
 				display.LoadFont("font.bmp", 12, 16, 96);
 				Console.WriteLine("LCD Display symbol");
-				display.DrawSymbol(10, 70, (char)0xfa, 0xFF);
+				display.DrawSymbol(10, 70, (char)0x20, 0xFF);
 			}
 		}
 	}
