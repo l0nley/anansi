@@ -25,6 +25,8 @@
 		static extern void lcd_load_chars(uint cwidth, uint cheight, uint ccout, [In]uint[] matrix, uint length);
 		[DllImport("libkedei.so")]
 		static extern void lcd_draw_symbol(uint x, uint y, uint sym, uint color);
+		[DllImport("libkedei.so")]
+		static extern void lcd_draw_string(uint x, uint y, uint bs, uint color, [In]string s);
 
 		public void Init()
 		{
@@ -39,6 +41,11 @@
 
 		public void Reset() {
 			lcd_reset();
+		}
+
+		public void DrawString(uint x, uint y, uint bs, uint color, string s)
+		{
+			lcd_draw_string(x, y, bs, color, s);
 		}
 
 		public void DrawSymbol(uint x, uint y, uint symbol, uint color)

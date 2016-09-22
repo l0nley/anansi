@@ -5,10 +5,12 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Anansi.Console PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Anansi.Kedei\AnansiLcd.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Anansi.Kedei\LcdDisplay.cs">
     <Files>
-      <File FileName="Anansi.Console\Program.cs" Line="15" Column="25" />
-      <File FileName="Anansi.Kedei\AnansiLcd.cs" Line="19" Column="50" />
+      <File FileName="Anansi.Console\Program.cs" Line="13" Column="43" />
+      <File FileName="Anansi.Kedei\AnansiLcd.cs" Line="58" Column="4" />
+      <File FileName="Anansi.Kedei\LcdSensor.cs" Line="3" Column="1" />
+      <File FileName="Anansi.Kedei\LcdDisplay.cs" Line="28" Column="26" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +18,7 @@
           <Node name="Anansi" expanded="True">
             <Node name="Anansi.Console" expanded="True" />
             <Node name="Anansi.Kedei" expanded="True">
-              <Node name="AnansiLcd.cs" selected="True" />
+              <Node name="LcdDisplay.cs" selected="True" />
             </Node>
           </Node>
         </State>
