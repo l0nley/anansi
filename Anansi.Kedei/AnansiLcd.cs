@@ -82,7 +82,7 @@ namespace Anansi.Kedei
 					{
 						var iface = interfaces[i];
 						var addr = iface.GetIPProperties().UnicastAddresses.FirstOrDefault(_=>_.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
-						s = iface.Id + " " + GetIfaceType(iface.NetworkInterfaceType) + " " + MakeItLength(iface.OperationalStatus.ToString(),4) + " " + (addr == null ? "no IP" : addr.ToString());
+						s = MakeItLength(iface.Id,5) + " " + GetIfaceType(iface.NetworkInterfaceType) + " " + MakeItLength(iface.OperationalStatus.ToString(),4) + " " + (addr == null ? "no IP" : addr.Address.ToString());
 					}
 					_display.DrawString(185, curh, Base, White, MakeItLength(s, 20));
 					curh += CHeight + 1;
