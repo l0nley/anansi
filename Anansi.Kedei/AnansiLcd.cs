@@ -41,7 +41,9 @@ namespace Anansi.Kedei
 		private void HandleTimerCallback(object state)
 		{
 			var networkAvailiable = NetworkInterface.GetIsNetworkAvailable();
+			Console.WriteLine(networkAvailiable);
 			var interfaces = NetworkInterface.GetAllNetworkInterfaces();
+			Console.WriteLine(interfaces.Length);
 			_display.DrawString(185, 2, Base, 0xff, "System:");
 			_display.DrawString(185, CHeight + 4, Base, 0xff, "NET: ");
 			_display.DrawString(CWidth * 5, CHeight + 4, Base, ((uint)(networkAvailiable ? 0x00FF00 : 0xFF0000)), (networkAvailiable ? "ON " : "OFF"));
