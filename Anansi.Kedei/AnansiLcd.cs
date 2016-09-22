@@ -22,8 +22,8 @@ namespace Anansi.Kedei
 		const uint Black = 0x00;
 		const uint White = 0xff;
 		const uint Magenta = 0xfa;
-		const uint Red = 0xaa;
-		const uint Green = 0xab;
+		const uint Red = 0xca;
+		const uint Green = 0xdb;
 		readonly List<LcdSensor> _sensors;
 		bool disposed = false;
 		int _lastId = -1;
