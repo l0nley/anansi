@@ -42,9 +42,9 @@ namespace Anansi.Kedei
 		{
 			var networkAvailiable = NetworkInterface.GetIsNetworkAvailable();
 			var interfaces = NetworkInterface.GetAllNetworkInterfaces();
-			Task.Run(() => _display.DrawString(185, 2, Base, 0xff, "System:")).Wait();
-			Task.Run(() => _display.DrawString(185, CHeight + 4, Base, 0xff, "NET: ")).Wait();
-			Task.Run(() => _display.DrawString(CWidth * 5, CHeight + 4, Base, ((uint)(networkAvailiable ? 0x00FF00 : 0xFF0000)), (networkAvailiable ? "ON " : "OFF"))).Wait();
+			Task.Run(() => _display.DrawString(185, 2, Base, 0xff, "System:"));
+			Task.Run(() => _display.DrawString(185, CHeight + 4, Base, 0xff, "NET: "));
+			Task.Run(() => _display.DrawString(CWidth * 5, CHeight + 4, Base, ((uint)(networkAvailiable ? 0x00FF00 : 0xFF0000)), (networkAvailiable ? "ON " : "OFF")));
 			var curh = CHeight * 2 + 4 + 1;
 			for (var i = 0; i < 5; i++)
 			{
