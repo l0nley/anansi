@@ -22,8 +22,8 @@ namespace Anansi.Kedei
 		const uint Black = 0x00;
 		const uint White = 0xff;
 		const uint Magenta = 0xfa;
-		const uint Red = 0xfb;
-		const uint Green = 0xfc;
+		const uint Red = 0xaa;
+		const uint Green = 0xab;
 		readonly List<LcdSensor> _sensors;
 		bool disposed = false;
 		int _lastId = -1;
@@ -71,9 +71,9 @@ namespace Anansi.Kedei
 			return Task.Run(() =>
 			{
 				_display.DrawString(185, SysStart, Base, White, "NET: ");
-				_display.DrawString(185 + CWidth * 5, SysStart, Base, (network ? Green : Red), (network ? "ON " : "OFF"));
-				_display.DrawString(185, SysStart + CHeight + 1, Base, White, "INET: ");
-				_display.DrawString(185 + CWidth * 6, SysStart + CHeight + 1, Base, (internet ? Green : Red), (internet ? "ON " : "OFF"));
+				_display.DrawString(185 + CWidth * 5, SysStart, Base, (network ? Green : Red), (network ? "ON  " : "OFF "));
+				_display.DrawString(185 + CWidth * 9, SysStart, Base, White, "INET: ");
+				_display.DrawString(185 + CWidth * 15, SysStart, Base, (internet ? Green : Red), (internet ? "ON " : "OFF"));
 				var curh = SysStart + (CHeight + 1) * 2;
 				for (var i = 0; i < 2; i++)
 				{
@@ -81,12 +81,30 @@ namespace Anansi.Kedei
 					if (interfaces.Length > i)
 					{
 						var iface = interfaces[i];
-						s = iface.Id + " " + iface.NetworkInterfaceType + " " + iface.OperationalStatus;
+						var addr = iface.GetIPProperties().UnicastAddresses.FirstOrDefault(_=>_.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+						s = iface.Id + " " + GetIfaceType(iface.NetworkInterfaceType) + " " + MakeItLength(iface.OperationalStatus.ToString(),4) + " " + (addr == null ? "no IP" : addr.ToString());
 					}
 					_display.DrawString(185, curh, Base, White, MakeItLength(s, 20));
+					curh += CHeight + 1;
 				}
 			});
 		}
+		private string GetIfaceType(NetworkInterfaceType type)
+		{
+			switch (type)
+			{
+				case NetworkInterfaceType.Ethernet:
+				case NetworkInterfaceType.Ethernet3Megabit:
+				case NetworkInterfaceType.FastEthernetFx:
+				case NetworkInterfaceType.FastEthernetT:
+					return "ETHR";
+				case NetworkInterfaceType.Wireless80211:
+					return "WIFI";
+				default:
+					return "UNKN";
+			}
+		}
+
 
 		private string MakeItLength(string s, uint length)
 		{
