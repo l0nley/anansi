@@ -10,7 +10,7 @@ namespace Anansi.Kedei
 		readonly LcdDisplay _display;
 		const uint MaxX = 480;
 		const uint MaxY = 320;
-		const uint Base = 20;
+		const uint Base = 0x20;
 		readonly List<LcdSensor> _sensors;
 		int _lastId = 0;
 
