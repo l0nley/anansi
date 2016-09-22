@@ -81,14 +81,38 @@ namespace Anansi.Kedei
 					if (interfaces.Length > i)
 					{
 						var iface = interfaces[i];
-						var addr = iface.GetIPProperties().UnicastAddresses.FirstOrDefault(_=>_.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
-						s = MakeItLength(iface.Id,5) + " " + GetIfaceType(iface.NetworkInterfaceType) + " " + MakeItLength(iface.OperationalStatus.ToString(),4) + " " + (addr == null ? "no IP" : addr.Address.ToString());
+						s = MakeItLength(iface.Id,5) + " " + GetIfaceType(iface.NetworkInterfaceType) + " " + GetOperationalStatus(iface.OperationalStatus) + " " +GetIp(iface);
 					}
-					_display.DrawString(185, curh, Base, White, MakeItLength(s, 20));
+					_display.DrawString(185, curh, Base, White, MakeItLength(s,29));
 					curh += CHeight + 1;
 				}
 			});
 		}
+
+		private string GetIp(NetworkInterface iface)
+		{
+			var addr = iface.GetIPProperties().UnicastAddresses.FirstOrDefault(_ => _.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+			var s = "No IP";
+			if (addr == null)
+			{
+				s = addr.Address.ToString();
+			}
+			return MakeItLength(s, 15);
+		}
+
+		private string GetOperationalStatus(OperationalStatus status)
+		{
+			switch (status)
+			{
+				case OperationalStatus.Up:
+					return "U";
+				case OperationalStatus.Down:
+					return "D";
+				default:
+					return "U";
+			}
+		}
+
 		private string GetIfaceType(NetworkInterfaceType type)
 		{
 			switch (type)
