@@ -81,7 +81,7 @@ namespace Anansi.Kedei
 					if (interfaces.Length > i)
 					{
 						var iface = interfaces[i];
-						s = MakeItLength(iface.Id,5) + " " + GetIfaceType(iface.NetworkInterfaceType) + " " + GetOperationalStatus(iface.OperationalStatus) + " " +GetIp(iface);
+						s = MakeItLength(iface.Id,5) + " " + GetOperationalStatus(iface.OperationalStatus) + " " +GetIp(iface);
 					}
 					_display.DrawString(185, curh, Base, White, MakeItLength(s,29));
 					curh += CHeight + 1;
@@ -95,7 +95,7 @@ namespace Anansi.Kedei
 			var s = "No IP";
 			if (addr != null)
 			{
-				s = addr.Address.ToString();
+				s = "192.168.244.255";
 			}
 			return MakeItLength(s, 15);
 		}
@@ -112,23 +112,6 @@ namespace Anansi.Kedei
 					return "U";
 			}
 		}
-
-		private string GetIfaceType(NetworkInterfaceType type)
-		{
-			switch (type)
-			{
-				case NetworkInterfaceType.Ethernet:
-				case NetworkInterfaceType.Ethernet3Megabit:
-				case NetworkInterfaceType.FastEthernetFx:
-				case NetworkInterfaceType.FastEthernetT:
-					return "ETHR";
-				case NetworkInterfaceType.Wireless80211:
-					return "WIFI";
-				default:
-					return "UNKN";
-			}
-		}
-
 
 		private string MakeItLength(string s, uint length)
 		{
