@@ -22,10 +22,10 @@ namespace Anansi.Kedei
 
 		private void DrawAreas()
 		{
-			_display.EmptyRectangle(0, 0, 180, MaxY,0xff,0x00);
-			_display.EmptyRectangle(180, 0, MaxX, 120, 0xff, 0x00);
-			_display.EmptyRectangle(180, 120, MaxX, MaxY, 0xff, 0x00);
-			_display.DrawString(2, 2, Base, 0xff, "Sensors:");
+			//_display.EmptyRectangle(0, 0, 180, MaxY,0xff,0x00);
+			//_display.EmptyRectangle(180, 0, MaxX, 120, 0xff, 0x00);
+			//_display.EmptyRectangle(180, 120, MaxX, MaxY, 0xff, 0x00);
+			_display.DrawString(2, 2, Base, 0xff, "!");
 		}
 
 		public Task Init()
