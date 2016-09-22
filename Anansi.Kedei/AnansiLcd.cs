@@ -93,7 +93,7 @@ namespace Anansi.Kedei
 		{
 			var addr = iface.GetIPProperties().UnicastAddresses.FirstOrDefault(_ => _.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
 			var s = "No IP";
-			if (addr == null)
+			if (addr != null)
 			{
 				s = addr.Address.ToString();
 			}
