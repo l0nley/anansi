@@ -151,7 +151,7 @@ namespace Anansi.Kedei
 
 		private void DisplaySensorValue(uint x, uint y, string name, string value)
 		{
-			_display.DrawString(x, y, Base, Magenta, name + ": " + value);
+			_display.DrawString(x, y, Base, White, name + ": " + value);
 		}
 
 		public void Dispose()
