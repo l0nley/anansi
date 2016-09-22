@@ -41,12 +41,10 @@ namespace Anansi.Kedei
 		private void HandleTimerCallback(object state)
 		{
 			var networkAvailiable = NetworkInterface.GetIsNetworkAvailable();
-			Console.WriteLine(networkAvailiable);
 			var interfaces = NetworkInterface.GetAllNetworkInterfaces();
-			Console.WriteLine(interfaces.Length);
-			_display.DrawString(185, 2, Base, 0xff, "System:");
-			_display.DrawString(185, CHeight + 4, Base, 0xff, "NET: ");
-			_display.DrawString(CWidth * 5, CHeight + 4, Base, ((uint)(networkAvailiable ? 0x00FF00 : 0xFF0000)), (networkAvailiable ? "ON " : "OFF"));
+			Task.Run(() => _display.DrawString(185, 2, Base, 0xff, "System:")).Wait();
+			Task.Run(() => _display.DrawString(185, CHeight + 4, Base, 0xff, "NET: ")).Wait();
+			Task.Run(() => _display.DrawString(CWidth * 5, CHeight + 4, Base, ((uint)(networkAvailiable ? 0x00FF00 : 0xFF0000)), (networkAvailiable ? "ON " : "OFF"))).Wait();
 			var curh = CHeight * 2 + 4 + 1;
 			for (var i = 0; i < 5; i++)
 			{
@@ -59,7 +57,7 @@ namespace Anansi.Kedei
 				else {
 					s = MakeItLength(string.Empty, 20) + "!";
 				}
-				_display.DrawString(185, curh, Base, 0xff, s);
+				Task.Run(() => _display.DrawString(185, curh, Base, 0xff, s));
 				curh += CHeight + 1;
 			}
 			                    
