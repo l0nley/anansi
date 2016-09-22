@@ -34,6 +34,7 @@
     <Compile Include="LcdDisplay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="AnansiLcd.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

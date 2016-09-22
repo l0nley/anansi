@@ -5,10 +5,22 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Anansi.Console PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Anansi.Kedei\LcdDisplay.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Anansi.Kedei\AnansiLcd.cs">
     <Files>
-      <File FileName="Anansi.Console\Program.cs" Line="21" Column="29" />
-      <File FileName="Anansi.Kedei\LcdDisplay.cs" Line="67" Column="6" />
+      <File FileName="Anansi.Console\Program.cs" Line="15" Column="25" />
+      <File FileName="Anansi.Kedei\AnansiLcd.cs" Line="19" Column="50" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Anansi" expanded="True">
+            <Node name="Anansi.Console" expanded="True" />
+            <Node name="Anansi.Kedei" expanded="True">
+              <Node name="AnansiLcd.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
 </Properties>
