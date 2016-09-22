@@ -4,6 +4,7 @@
 	using System.Runtime.InteropServices;
 	using System.Drawing;
 	using System.Collections.Generic;
+	using System.Text;
 
 	public class LcdDisplay : IDisposable
 	{
@@ -45,7 +46,9 @@
 
 		public void DrawString(uint x, uint y, uint bs, uint color, string s)
 		{
-			lcd_draw_string(x, y, bs, color, s);
+			var bytes = Encoding.Default.GetBytes(s);
+			var ascii = Encoding.Convert(Encoding.Default, Encoding.ASCII, bytes);
+			lcd_draw_string(x, y, bs, color, Encoding.ASCII.GetString(ascii));
 		}
 
 		public void DrawSymbol(uint x, uint y, uint symbol, uint color)
