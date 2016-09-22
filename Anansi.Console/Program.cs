@@ -12,7 +12,7 @@
 			{
 				Task.Run(() => display.Init()).Wait();
 				var id = display.RegisterSensor("TEMP");
-				Task.Run(() => display.ChangeSensorValue(id, "128"));
+				Task.Run(() => display.ChangeSensorValue(id, "128")).Wait();
 			}
 		}
 	}
