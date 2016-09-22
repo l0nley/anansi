@@ -74,7 +74,7 @@ namespace Anansi.Kedei
 				_display.DrawString(185 + CWidth * 5, SysStart, Base, (network ? Green : Red), (network ? "ON  " : "OFF "));
 				_display.DrawString(185 + CWidth * 9, SysStart, Base, White, "INET: ");
 				_display.DrawString(185 + CWidth * 15, SysStart, Base, (internet ? Green : Red), (internet ? "ON " : "OFF"));
-				var curh = SysStart + (CHeight + 1) * 2;
+				var curh = SysStart + (CHeight + 1);
 				for (var i = 0; i < 2; i++)
 				{
 					var s = "No interface";

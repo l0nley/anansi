@@ -4,6 +4,7 @@
 	using Anansi.Kedei;
 	using System.Threading.Tasks;
 	using System.Net.NetworkInformation;
+	using System.Linq;
 
 	class MainClass
 	{
@@ -16,7 +17,7 @@
 				Task.Run(() => display.ChangeSensorValue(id, "128")).Wait();
 				var id2 = display.RegisterSensor("SMOKE");
 				Task.Run(() => display.ChangeSensorValue(id2,"asdsads")).Wait();
-				Task.Run(() => display.SetNetworkState(true, false, NetworkInterface.GetAllNetworkInterfaces())).Wait();
+				Task.Run(() => display.SetNetworkState(true, false, NetworkInterface.GetAllNetworkInterfaces().Where(_=>_.Name!="lo").ToArray())).Wait();
 			}
 		}
 	}
