@@ -6,8 +6,8 @@ namespace Anansi.Kedei
 	public class AnansiLcd : IDisposable
 	{
 		readonly LcdDisplay _display;
-		const uint MaxX = 300;
-		const uint MaxY = 300;
+		const uint MaxX = 480;
+		const uint MaxY = 320;
 
 		public AnansiLcd()
 		{
@@ -16,7 +16,7 @@ namespace Anansi.Kedei
 
 		private void DrawAreas()
 		{
-			_display.EmptyRectangle(0, 0, MaxX, MaxY, 0xff, 0);
+			_display.Rectangle(0, 0, MaxX, MaxY, 0xff);
 		}
 
 		public Task Init()
