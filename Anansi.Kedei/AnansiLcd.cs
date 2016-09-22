@@ -16,7 +16,9 @@ namespace Anansi.Kedei
 
 		private void DrawAreas()
 		{
-			_display.Rectangle(0, 0, MaxX, MaxY, 0xff);
+			_display.EmptyRectangle(0, 0, 180, MaxY,0x00,0xff);
+			_display.EmptyRectangle(180, 0, MaxX, 120, 0x00, 0xff);
+			_display.EmptyRectangle(180, 120, MaxX, MaxY, 0x00, 0xff);
 		}
 
 		public Task Init()
