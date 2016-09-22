@@ -18,57 +18,38 @@ namespace Anansi.Kedei
 		const uint CHeight = 16;
 		const int SnsNameLength = 3;
 		const int SnsValueLength = 9;
+		const uint SysStart = 20;
+		const uint Black = 0x00;
+		const uint White = 0xff;
+		const uint Magenta = 0xfa;
+		const uint Red = 0xfb;
+		const uint Green = 0xfc;
 		readonly List<LcdSensor> _sensors;
 		bool disposed = false;
 		int _lastId = -1;
-		readonly Timer _timer;
 
 		public AnansiLcd()
 		{
 			_display = new LcdDisplay();
 			_sensors = new List<LcdSensor>();
-			_timer = new Timer(HandleTimerCallback, null, 200, 1000);
 		}
 
 		private void DrawAreas()
 		{
-			_display.EmptyRectangle(0, 0, 180, MaxY,0xff,0x00);
-			_display.EmptyRectangle(180, 0, MaxX, 120, 0xff, 0x00);
-			_display.EmptyRectangle(180, 120, MaxX, MaxY, 0xff, 0x00);
-			_display.DrawString(2, 2, Base, 0xff, "Sensors:");
+			_display.EmptyRectangle(0, 0, 180, MaxY, White, Black);
+			_display.EmptyRectangle(180, 0, MaxX, 120, White, Black);
+			_display.EmptyRectangle(180, 120, MaxX, MaxY, White, Black);
+			_display.DrawString(2, 2, Base, White, "Sensors:");
+			_display.DrawString(185, 2, Base, White, "System:");
 		}
 
-		private void HandleTimerCallback(object state)
-		{
-			var networkAvailiable = NetworkInterface.GetIsNetworkAvailable();
-			var interfaces = NetworkInterface.GetAllNetworkInterfaces();
-			Task.Run(() => _display.DrawString(185, 2, Base, 0xff, "System:"));
-			Task.Run(() => _display.DrawString(185, CHeight + 4, Base, 0xff, "NET: "));
-			Task.Run(() => _display.DrawString(CWidth * 5, CHeight + 4, Base, ((uint)(networkAvailiable ? 0x00FF00 : 0xFF0000)), (networkAvailiable ? "ON " : "OFF")));
-			var curh = CHeight * 2 + 4 + 1;
-			for (var i = 0; i < 5; i++)
-			{
-				string s;
-				if (interfaces.Length > i)
-				{
-					var iface = interfaces[i];
-					s = MakeItLength(iface.Id, 4) + " " + MakeItLength(iface.NetworkInterfaceType.ToString(), 5);
-				}
-				else {
-					s = MakeItLength(string.Empty, 20) + "!";
-				}
-				Task.Run(() => _display.DrawString(185, curh, Base, 0xff, s));
-				curh += CHeight + 1;
-			}
-			                    
-		}
 
 		public Task Init()
 		{
 			return Task.Run(() =>
 			{
 				_display.Init();
-				_display.Clear(0x00);
+				_display.Clear(Black);
 				_display.LoadFont("font.bmp", CWidth, CHeight, 96);
 				DrawAreas();
 			});
@@ -81,8 +62,30 @@ namespace Anansi.Kedei
 				Id = Interlocked.Increment(ref _lastId),
 				Name = MakeItLength(name, SnsNameLength)
 			};
-    		_sensors.Add(sensor);
+			_sensors.Add(sensor);
 			return sensor.Id;
+		}
+
+		public Task SetNetworkState(bool network, bool internet, NetworkInterface[] interfaces)
+		{
+			return Task.Run(() =>
+			{
+				_display.DrawString(185, SysStart, Base, White, "NET: ");
+				_display.DrawString(185 + CWidth * 5, SysStart, Base, (network ? Green : Red), (network ? "ON " : "OFF"));
+				_display.DrawString(185, SysStart + CHeight + 1, Base, White, "INET: ");
+				_display.DrawString(185 + CWidth * 6, SysStart + CHeight + 1, Base, (internet ? Green : Red), (internet ? "ON " : "OFF"));
+				var curh = SysStart + (CHeight + 1) * 2;
+				for (var i = 0; i < 2; i++)
+				{
+					var s = "No interface";
+					if (interfaces.Length > i)
+					{
+						var iface = interfaces[i];
+						s = iface.Id + " " + iface.NetworkInterfaceType + " " + iface.OperationalStatus;
+					}
+					_display.DrawString(185, curh, Base, White, MakeItLength(s, 20));
+				}
+			});
 		}
 
 		private string MakeItLength(string s, uint length)
@@ -128,11 +131,10 @@ namespace Anansi.Kedei
 		{
 			if (disposed == false)
 			{
-				_timer.Dispose();
 				_display.Dispose();
 			}
 		}
 	}
 
-	
+
 }
