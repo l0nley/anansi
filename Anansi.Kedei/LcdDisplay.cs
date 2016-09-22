@@ -54,7 +54,9 @@
 				{
 					for (var x = 0; x < image.Width; x++)
 					{
-						matrix.Add((uint)image.GetPixel(x, y).ToArgb());
+						uint pixel = image.GetPixel(x, y).ToArgb() > 0 ? (uint)1 : 0;
+						Console.WriteLine(pixel);
+						matrix.Add(pixel);
 					}
 				}
 			}
