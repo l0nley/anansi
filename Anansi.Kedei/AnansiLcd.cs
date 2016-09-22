@@ -95,7 +95,7 @@ namespace Anansi.Kedei
 			var s = "No IP";
 			if (addr != null)
 			{
-				s = "192.168.244.255";
+				s = addr.Address.ToString();
 			}
 			return MakeItLength(s, 15);
 		}
