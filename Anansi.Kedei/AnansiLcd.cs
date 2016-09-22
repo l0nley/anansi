@@ -23,7 +23,9 @@ namespace Anansi.Kedei
 		const uint White = 0xff;
 		const uint Magenta = 0xfa;
 		const uint Red = 0xca;
-		const uint Green = 0xdb;
+		const uint Green = 0x0f;
+		const uint Blue = 0x0a;
+
 		readonly List<LcdSensor> _sensors;
 		bool disposed = false;
 		int _lastId = -1;
@@ -149,7 +151,7 @@ namespace Anansi.Kedei
 
 		private void DisplaySensorValue(uint x, uint y, string name, string value)
 		{
-			_display.DrawString(x, y, Base, 0xff, name + ": " + value);
+			_display.DrawString(x, y, Base, Magenta, name + ": " + value);
 		}
 
 		public void Dispose()
