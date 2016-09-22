@@ -12,7 +12,7 @@ namespace Anansi.Kedei
 		const uint MaxX = 480;
 		const uint MaxY = 320;
 		const uint Base = 0x20;
-		const uint SnsStart = 15;
+		const uint SnsStart = 20;
 		const uint CWidth = 12;
 		const uint CHeight = 16;
 		readonly List<LcdSensor> _sensors;
@@ -84,13 +84,13 @@ namespace Anansi.Kedei
 			{
 				return;
 			}
-			sns.Value = MakeItLength(value, 5);
+			sns.Value = MakeItLength(value, 8);
 			DisplaySensorValue(2, (uint)(SnsStart + sns.Id * (CHeight + 1)), sns.Name, sns.Value);
 		}
 
 		private void DisplaySensorValue(uint x, uint y, string name, string value)
 		{
-			_display.DrawString(x, y, Base, 0xff, name + ":!" + value);
+			_display.DrawString(x, y, Base, 0xff, name + ": " + value);
 		}
 
 		public void Dispose()

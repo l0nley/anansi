@@ -13,6 +13,8 @@
 				Task.Run(() => display.Init()).Wait();
 				var id = display.RegisterSensor("TEMP");
 				Task.Run(() => display.ChangeSensorValue(id, "128")).Wait();
+				var id2 = display.RegisterSensor("SMOKE");
+				Task.Run(() => display.ChangeSensorValue(id2,"asdsads")).Wait();
 			}
 		}
 	}
